@@ -1,0 +1,39 @@
+{% extends "account/base.html" %}
+{% load materializecss %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div style="width: 400px;margin-top: 20px" class="row s12 m6">
+            <div class="card blue-grey">
+                <div class="card-content white-text">
+                    <span class="card-title">Sign Up</span>
+                    <p>{% blocktrans %}Already have an account? Then please
+                        <a href="{{ login_url }}" class="orange-text darken-3">sign in</a>
+                        .{% endblocktrans %}
+                </div>
+                <div class="card-action">
+                    <form id="signup_form" method="post" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        {{ form|materializecss }}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        <div class='row'>
+                            <div class="col s12">
+                                <button type='submit' name='submit' class='btn btn-large waves-effect cyan'
+                                        style="width: 100%">Sign Up
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

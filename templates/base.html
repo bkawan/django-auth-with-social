@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% block title %}
+    {% endblock title %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    {% block css %}{% endblock %}
+
+</head>
+<body>
+{% if user.is_authenticated %}
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="{% url 'users:user_profile' user.id %}">Profile</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'account_logout' %}"><i class="material-icons left">power_settings_new</i>Logout</a></li>
+    </ul>
+{% endif %}
+<nav>
+
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"><img src="{% static 'images/logo.png' %}" alt="" height="64" width="64"></a>
+        {% if user.is_authenticated %}
+            <ul class="right">
+                <li><a href="mobile.html"></a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ user.username }}<i
+                        class="material-icons right">person</i></a></li>
+
+            </ul>
+        {% endif %}
+    </div>
+</nav>
+
+{% block content %}{% endblock %}
+{% block js %}
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems);
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Initialize materialize data picker
+            $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+            $('select').formSelect();
+
+        });
+
+    </script>
+{% endblock %}
+</body>
+</html>

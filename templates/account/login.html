@@ -1,0 +1,68 @@
+{% extends "account/base.html" %}
+{% load socialaccount %}
+{% load i18n %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div style="width: 400px;border: black;border: 1px solid;margin-top: 20px" class="row">
+            <div class="row" style="padding: 20px">
+                <form class="col s12 login" id="login_form" action="{% url 'account_login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
+                            <input id="id_login" name="login" type="text" class="validate">
+                            <label for="icon_prefix" id="id_login">Email</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">vpn_key</i>
+                            <input id="id_password" name="password" type="password" class="validate">
+                            <label for="password" id="id_password">Password</label>
+                        </div>
+                    </div>
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <div class='row'>
+                        <div class="col s12">
+                            <button type='submit' class='btn btn-large waves-effect teal'
+                                    style="width: 100%">Login
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="row" style="padding: 20px;padding-top: 0">
+                <div class="col s12">
+                    {% providers_media_js %}
+                    <a href="{% provider_login_url "facebook" method="js_sdk" %}"
+                       class="waves-effect waves-light btn-large"
+                       style="width:100%;background-color:  #3b5998; color:white">
+                        <i class="fab fa-facebook-f"></i> Login
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="padding: 20px;padding-top: 0">
+                <div class="col s12">
+                    <label>
+                        <input type="checkbox"/>
+                        <span>I accepts terms and condition</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row" style="padding: 20px;padding-top: 0">
+                <div class="col s12">
+                    <div class="col s6"><a href="{% url 'account_signup' %}">Register</a></div>
+                    <div class="col s6"><a href="">Forgot Password?</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

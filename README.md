@@ -2,6 +2,8 @@
 This repository is  an example of django authentication with Social Provider using [django-allauth](https://django-allauth.readthedocs.io/en/latest/index.html)
 
 
+![alt_text](static/docs/images/login_page.png)
+
 Currently Supported Social Provider
 - Facebook
 
@@ -17,6 +19,12 @@ $ python manage.py createsuperuser
 $ python manage.py runserver
 
 ```
+
+**Using https in localhost**
+```
+$ python manage.py runserver_plus --cert /tmp/cert
+```
+
 
 
 
